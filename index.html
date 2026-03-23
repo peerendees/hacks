@@ -248,16 +248,16 @@
           </a>
           <span>Hacks v1</span>
         </nav>
-        <p class="eyebrow">AI-gestützter Workflow</p>
+        <p class="eyebrow">Praxisnahe AI-Hacks</p>
         <h1>
-          <span class="h1-accent">Von der</span><br>
-          Idee<span class="h1-gold"> + </span>ins<br>
-          <span class="h1-accent">Netz.</span>
+          <span class="h1-accent">Weniger</span><br>
+          Reibung<span class="h1-gold"> + </span>mehr<br>
+          <span class="h1-accent">Wirkung.</span>
         </h1>
         <p class="hero-text">
-          Zwei konkrete Hacks für sauberere AI-Ausgaben und bessere Produktentscheidungen:
-          UTF-8-Guardrails für deutschsprachige Inhalte sowie ein klarer Vorab-Check, ob eine App wirklich
-          dupliziert werden muss oder als konfigurierbare Variante betrieben werden kann.
+          Zwei konkrete Hacks für den Alltag mit AI-Tools und Produktteams:
+          erstens belastbare UTF-8-Guardrails für deutschsprachige Inhalte,
+          zweitens ein Entscheidungsrahmen gegen unnötige App-Duplikate.
         </p>
         <div class="chip-row">
           <span class="chip">Claude Code</span>
@@ -271,17 +271,18 @@
     <section>
       <div class="wrap">
         <p class="sec-label">00 — Vorbereitung</p>
-        <h2>Scope und Zielbild fixieren.</h2>
+        <h2>Warum diese zwei Hacks?</h2>
         <p class="lead">
-          Dieser One-Pager dokumentiert zwei Hacks: erstens robuste Zeichensatzvorgaben für deutschsprachige AI-Texte,
-          zweitens eine Entscheidungslogik vor dem Duplizieren von Apps.
+          Diese Seite adressiert zwei häufige, teure Fehler im Projektalltag:
+          inkonsistente Zeichencodierung bei deutscher AI-Textausgabe und vorschnelles
+          Klonen von Anwendungen statt sauberer Konfigurierbarkeit.
         </p>
         <details>
           <summary>Details aufklappen</summary>
           <ul>
-            <li>Fokus: sofort anwendbare Patterns statt langer Theorie.</li>
-            <li>Nutzung: Team-Referenz für neue Projekte und Kundenableger.</li>
-            <li>Format: kurze Kernbotschaften plus vertiefende Umsetzungsschritte.</li>
+            <li>Fokus: direkt umsetzbar in bestehenden Projekten.</li>
+            <li>Nutzung: als Team-Standard für Setup, Review und Übergabe.</li>
+            <li>Format: kompakter Überblick plus aufklappbarer Deep-Dive.</li>
           </ul>
         </details>
       </div>
@@ -290,21 +291,21 @@
     <section>
       <div class="wrap">
         <p class="sec-label">01 — Hack A</p>
-        <h2>UTF-8 für Claude und Skills erzwingen.</h2>
+        <h2>Hack A: UTF-8 als nicht verhandelbarer Standard.</h2>
         <p class="lead">
           Wenn deutsche Inhalte generiert werden, muss die Prompt- und Skill-Basis explizit UTF-8 mit Umlauten vorgeben.
           So vermeidest Du fehlerhafte Darstellungen wie "ä/ö/ü" als Umschreibung oder kaputte Sonderzeichen.
         </p>
         <div class="grid">
           <article class="card">
-            <h3>Kernregel</h3>
+            <h3>Prinzip</h3>
             <p>
               In jeder <code>CLAUDE.md</code> und in jedem textgenerierenden Skill eine feste Sprach- und Encoding-Regel
               hinterlegen: "Deutsch, UTF-8, Umlaute und Eszett unverändert ausgeben."
             </p>
           </article>
           <article class="card">
-            <h3>Nutzen</h3>
+            <h3>Ergebnis</h3>
             <p>
               Konsistente Ausgaben in Mails, Webcopy, Doku und UI-Texten ohne manuelle Nachkorrektur.
             </p>
@@ -326,17 +327,17 @@
     <section>
       <div class="wrap">
         <p class="sec-label">02 — Hack B</p>
-        <h2>Vor Duplikation: Produkt oder nur Konfiguration?</h2>
+        <h2>Hack B: Vor jedem Fork erst Architektur-Check.</h2>
         <p class="lead">
           Bevor Du eine App für einen weiteren Kunden duplizierst, prüfe systematisch:
           Ist die Funktionalität wirklich anders, oder reicht eine variabel steuerbare Konfiguration?
         </p>
         <article class="card">
-          <h3>Quick-Check (3 Fragen)</h3>
+          <h3>Quick-Check (3 Fragen vor der Duplikation)</h3>
           <ol>
             <li>Sind Kernprozesse und Datenmodell identisch?</li>
             <li>Unterscheidet sich nur CI, Wording oder Rollenrechte?</li>
-            <li>Gibt es kundenspezifische Integrationen, die echten Code-Fork erzwingen?</li>
+            <li>Gibt es kundenspezifische Integrationen, die einen echten Code-Fork erzwingen?</li>
           </ol>
         </article>
         <details>
@@ -362,7 +363,7 @@
     <section>
       <div class="wrap">
         <p class="sec-label">03 — Umsetzung</p>
-        <h2>Konkrete Einführung in Projekten.</h2>
+        <h2>Einführung im Team in 30 Minuten.</h2>
         <div class="steps">
           <article class="step">
             <h3>A. UTF-8-Guardrails</h3>
@@ -387,7 +388,7 @@
     <section>
       <div class="wrap">
         <p class="sec-label">04 — Abschluss</p>
-        <h2>Kurzfazit.</h2>
+        <h2>Takeaway.</h2>
         <p class="lead">
           Mit UTF-8-Guardrails und einem verpflichtenden Anti-Duplication-Check sinkt der Wartungsaufwand,
           während Qualität und Wiederverwendbarkeit steigen.
@@ -397,7 +398,7 @@
   </main>
 
   <footer>
-    <div class="wrap">Hacks One-Pager · Struktur angelehnt an den Webseiten-Relaunch-Leitfaden</div>
+    <div class="wrap">Hacks One-Pager · UTF-8 Guardrails und Anti-Duplication Framework</div>
   </footer>
 </body>
 </html>
