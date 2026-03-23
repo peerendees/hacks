@@ -1,172 +1,403 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacks | Claude UTF-8 und Smart Duplication</title>
-    <link href="output.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacks | Claude UTF-8 und Smart Duplication</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0c10;
+      --bg2: #131319;
+      --line: #2a2a33;
+      --text: #d7d0c6;
+      --muted: #9d9488;
+      --copper: #b8772f;
+      --gold: #e2c484;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Lora", serif;
+      line-height: 1.75;
+    }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+    .hero {
+      min-height: 90vh;
+      border-bottom: 1px solid var(--line);
+      padding: 2.2rem 0 3rem;
+      position: relative;
+      background: radial-gradient(900px 500px at 80% -10%, rgba(184,119,47,0.08), transparent 60%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: calc(50% - 560px + 2rem);
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, #3b3b45 12%, #3b3b45 88%, transparent);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-left: 1.6rem;
+      margin-bottom: 4.8rem;
+    }
+    .brand { color: inherit; text-decoration: none; display: inline-flex; gap: .6rem; align-items: center; }
+    .plus {
+      width: 14px; height: 14px; position: relative; display: inline-block;
+    }
+    .plus::before, .plus::after {
+      content: "";
+      position: absolute;
+      background: var(--gold);
+    }
+    .plus::before { width: 2px; height: 100%; left: 50%; transform: translateX(-50%); }
+    .plus::after { width: 100%; height: 2px; top: 50%; transform: translateY(-50%); }
+
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--copper);
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-size: .68rem;
+      margin-bottom: 1.9rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-left: 1.6rem;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 40px;
+      height: 1px;
+      background: #7e5424;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(4.5rem, 11vw, 11rem);
+      line-height: 0.88;
+      letter-spacing: .02em;
+      margin-bottom: 2rem;
+      padding-left: 1.6rem;
+      color: #d8d3cd;
+    }
+    .h1-accent { color: var(--copper); }
+    .h1-gold { color: var(--gold); }
+
+    .hero-text {
+      max-width: 740px;
+      font-size: 1.03rem;
+      color: var(--muted);
+      padding-left: 1.6rem;
+      margin-bottom: 2.2rem;
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      padding-left: 1.6rem;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .63rem;
+      padding: .42rem .8rem;
+    }
+
+    section {
+      border-bottom: 1px solid var(--line);
+      padding: 4.4rem 0;
+    }
+    .sec-label {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--copper);
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      font-size: .62rem;
+      margin-bottom: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .sec-label::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(to right, #41414b, transparent);
+    }
+    h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(2.2rem, 6vw, 4.8rem);
+      letter-spacing: .03em;
+      line-height: .95;
+      margin-bottom: 1.3rem;
+      color: #d8d3cd;
+    }
+    .lead {
+      max-width: 860px;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: .8rem;
+    }
+    .card, details {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      padding: 1.1rem 1.2rem;
+    }
+    .card h3, .step h3 {
+      font-family: "Lora", serif;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: .45rem;
+      font-weight: 600;
+    }
+    .card p, .card li, details li, details p {
+      color: var(--muted);
+      font-size: .96rem;
+    }
+    details { margin-top: 1rem; }
+    summary {
+      cursor: pointer;
+      list-style: none;
+      font-family: "JetBrains Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #d9d1c5;
+      font-size: .68rem;
+    }
+    details[open] summary { margin-bottom: .75rem; color: var(--gold); }
+    details ul, .card ul, .card ol { padding-left: 1.1rem; margin-top: .5rem; }
+    pre {
+      margin-top: .6rem;
+      background: #0a0a0d;
+      border: 1px solid #2e2e38;
+      color: #d3ccc2;
+      padding: .9rem;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", monospace;
+      font-size: .78rem;
+      line-height: 1.7;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .step {
+      border: 1px solid var(--line);
+      background: var(--bg2);
+      padding: 1.1rem 1.2rem;
+    }
+    .step ul { padding-left: 1.1rem; }
+
+    footer {
+      padding: 2rem 0;
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: .6rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .wrap { padding: 0 1rem; }
+      .hero::before { left: 1rem; }
+      .topbar, .eyebrow, h1, .hero-text, .chip-row { padding-left: .8rem; }
+      .grid, .steps { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding-bottom: 2.5rem; }
+    }
+  </style>
 </head>
-<body class="bg-neutral-950 text-neutral-100">
-    <main>
-        <section class="border-b border-neutral-800">
-            <div class="mx-auto max-w-6xl px-6 py-20 lg:py-28">
-                <p class="mb-6 text-xs uppercase tracking-[0.25em] text-amber-500">Hack Guide</p>
-                <h1 class="max-w-4xl text-4xl font-semibold leading-tight md:text-6xl">
-                    Zwei praxisnahe Hacks fuer robuste
-                    <span class="text-amber-400">AI-Workflows</span>
-                </h1>
-                <p class="mt-6 max-w-3xl leading-relaxed text-neutral-300">
-                    Kompakt fuer erfahrene Nutzer, mit aufklappbaren Deep-Dives fuer die Umsetzung.
-                    Die Struktur lehnt sich an den Webseiten-Relaunch-Leitfaden an.
-                </p>
-                <div class="mt-8 flex flex-wrap gap-3 text-xs">
-                    <span class="rounded border border-neutral-700 px-3 py-1.5 text-neutral-300">Claude Code</span>
-                    <span class="rounded border border-neutral-700 px-3 py-1.5 text-neutral-300">Skills</span>
-                    <span class="rounded border border-neutral-700 px-3 py-1.5 text-neutral-300">Produktstrategie</span>
-                    <span class="rounded border border-neutral-700 px-3 py-1.5 text-neutral-300">Multi-Tenant</span>
-                </div>
-            </div>
-        </section>
+<body>
+  <main>
+    <header class="hero">
+      <div class="wrap">
+        <nav class="topbar">
+          <a class="brand" href="https://berent.ai" target="_blank" rel="noopener">
+            <span class="plus"></span>
+            <span>BERENT.AI — Beratung + Entwicklung</span>
+          </a>
+          <span>Hacks v1</span>
+        </nav>
+        <p class="eyebrow">AI-gestützter Workflow</p>
+        <h1>
+          <span class="h1-accent">Von der</span><br>
+          Idee<span class="h1-gold"> + </span>ins<br>
+          <span class="h1-accent">Netz.</span>
+        </h1>
+        <p class="hero-text">
+          Zwei konkrete Hacks für sauberere AI-Ausgaben und bessere Produktentscheidungen:
+          UTF-8-Guardrails für deutschsprachige Inhalte sowie ein klarer Vorab-Check, ob eine App wirklich
+          dupliziert werden muss oder als konfigurierbare Variante betrieben werden kann.
+        </p>
+        <div class="chip-row">
+          <span class="chip">Claude Code</span>
+          <span class="chip">Skills</span>
+          <span class="chip">Produktstrategie</span>
+          <span class="chip">Multi-Tenant</span>
+        </div>
+      </div>
+    </header>
 
-        <section class="border-b border-neutral-800">
-            <div class="mx-auto max-w-6xl px-6 py-14">
-                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">00 - Vorbereitung</p>
-                <h2 class="mb-5 text-3xl font-semibold md:text-4xl">Scope und Zielbild fixieren</h2>
-                <p class="max-w-4xl leading-relaxed text-neutral-300">
-                    Dieser One-Pager dokumentiert zwei Hacks: erstens robuste Zeichensatzvorgaben fuer deutschsprachige
-                    AI-Texte, zweitens eine Entscheidungslogik vor dem Duplizieren von Apps.
-                </p>
-                <details class="mt-6 rounded border border-neutral-800 bg-neutral-900/60 p-5">
-                    <summary class="cursor-pointer font-medium text-neutral-100">Details aufklappen</summary>
-                    <ul class="mt-4 list-disc space-y-2 pl-6 text-neutral-300">
-                        <li>Fokus: sofort anwendbare Patterns statt langer Theorie.</li>
-                        <li>Nutzung: Team-Referenz fuer neue Projekte und Kundenableger.</li>
-                        <li>Format: kurze Kernbotschaften plus vertiefende Umsetzungsschritte.</li>
-                    </ul>
-                </details>
-            </div>
-        </section>
+    <section>
+      <div class="wrap">
+        <p class="sec-label">00 — Vorbereitung</p>
+        <h2>Scope und Zielbild fixieren.</h2>
+        <p class="lead">
+          Dieser One-Pager dokumentiert zwei Hacks: erstens robuste Zeichensatzvorgaben für deutschsprachige AI-Texte,
+          zweitens eine Entscheidungslogik vor dem Duplizieren von Apps.
+        </p>
+        <details>
+          <summary>Details aufklappen</summary>
+          <ul>
+            <li>Fokus: sofort anwendbare Patterns statt langer Theorie.</li>
+            <li>Nutzung: Team-Referenz für neue Projekte und Kundenableger.</li>
+            <li>Format: kurze Kernbotschaften plus vertiefende Umsetzungsschritte.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
 
-        <section class="border-b border-neutral-800">
-            <div class="mx-auto max-w-6xl px-6 py-14">
-                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">01 - Hack A</p>
-                <h2 class="mb-5 text-3xl font-semibold md:text-4xl">UTF-8 fuer Claude und Skills erzwingen</h2>
-                <p class="max-w-4xl leading-relaxed text-neutral-300">
-                    Wenn deutsche Inhalte generiert werden, muss die Prompt- und Skill-Basis explizit UTF-8 mit Umlauten
-                    vorgeben. So vermeidest Du fehlerhafte Darstellungen wie "ae/oe/ue" oder kaputte Sonderzeichen.
-                </p>
-
-                <div class="mt-6 grid gap-4 md:grid-cols-2">
-                    <div class="rounded border border-neutral-800 bg-neutral-900/60 p-5">
-                        <h3 class="mb-2 font-semibold text-amber-300">Kernregel</h3>
-                        <p class="text-sm text-neutral-300">
-                            In jeder <code>CLAUDE.md</code> und in jedem textgenerierenden Skill eine feste Sprach- und
-                            Encoding-Regel hinterlegen: "Deutsch, UTF-8, Umlaute und Eszett unveraendert ausgeben."
-                        </p>
-                    </div>
-                    <div class="rounded border border-neutral-800 bg-neutral-900/60 p-5">
-                        <h3 class="mb-2 font-semibold text-amber-300">Nutzen</h3>
-                        <p class="text-sm text-neutral-300">
-                            Konsistente Ausgaben in Mails, Webcopy, Doku und UI-Texten ohne manuelle Nachkorrektur.
-                        </p>
-                    </div>
-                </div>
-
-                <details class="mt-6 rounded border border-neutral-800 bg-neutral-900/60 p-5">
-                    <summary class="cursor-pointer font-medium text-neutral-100">Deep-Dive: konkrete Vorlage</summary>
-                    <div class="mt-4 space-y-4 text-neutral-300">
-                        <p class="text-sm">Empfohlener Baustein fuer <code>CLAUDE.md</code> und textnahe Skills:</p>
-                        <pre class="overflow-x-auto rounded bg-neutral-950 p-4 text-xs text-neutral-200"><code>Sprache und Encoding:
+    <section>
+      <div class="wrap">
+        <p class="sec-label">01 — Hack A</p>
+        <h2>UTF-8 für Claude und Skills erzwingen.</h2>
+        <p class="lead">
+          Wenn deutsche Inhalte generiert werden, muss die Prompt- und Skill-Basis explizit UTF-8 mit Umlauten vorgeben.
+          So vermeidest Du fehlerhafte Darstellungen wie "ä/ö/ü" als Umschreibung oder kaputte Sonderzeichen.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>Kernregel</h3>
+            <p>
+              In jeder <code>CLAUDE.md</code> und in jedem textgenerierenden Skill eine feste Sprach- und Encoding-Regel
+              hinterlegen: "Deutsch, UTF-8, Umlaute und Eszett unverändert ausgeben."
+            </p>
+          </article>
+          <article class="card">
+            <h3>Nutzen</h3>
+            <p>
+              Konsistente Ausgaben in Mails, Webcopy, Doku und UI-Texten ohne manuelle Nachkorrektur.
+            </p>
+          </article>
+        </div>
+        <details>
+          <summary>Deep-Dive: konkrete Vorlage</summary>
+          <p>Empfohlener Baustein für <code>CLAUDE.md</code> und textnahe Skills:</p>
+          <pre><code>Sprache und Encoding:
 - Antworte auf Deutsch (Du-Form), sofern nicht anders angefordert.
 - Nutze UTF-8 als Zeichensatz.
 - Umlaute und "ß" korrekt ausgeben.
-- Keine ASCII-Umschreibungen fuer deutsche Sonderzeichen verwenden.</code></pre>
-                        <p class="text-sm">Ergaenze diesen Block als festen Bestandteil jedes neuen Skills mit Textausgabe.</p>
-                    </div>
-                </details>
-            </div>
-        </section>
+- Keine ASCII-Umschreibungen für deutsche Sonderzeichen verwenden.</code></pre>
+          <p>Ergänze diesen Block als festen Bestandteil jedes neuen Skills mit Textausgabe.</p>
+        </details>
+      </div>
+    </section>
 
-        <section class="border-b border-neutral-800">
-            <div class="mx-auto max-w-6xl px-6 py-14">
-                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">02 - Hack B</p>
-                <h2 class="mb-5 text-3xl font-semibold md:text-4xl">Vor Duplikation: Produkt oder nur Konfiguration?</h2>
-                <p class="max-w-4xl leading-relaxed text-neutral-300">
-                    Bevor Du eine App fuer einen weiteren Kunden duplizierst, pruefe systematisch:
-                    Ist die Funktionalitaet wirklich anders, oder reicht eine variabel steuerbare Konfiguration?
-                </p>
+    <section>
+      <div class="wrap">
+        <p class="sec-label">02 — Hack B</p>
+        <h2>Vor Duplikation: Produkt oder nur Konfiguration?</h2>
+        <p class="lead">
+          Bevor Du eine App für einen weiteren Kunden duplizierst, prüfe systematisch:
+          Ist die Funktionalität wirklich anders, oder reicht eine variabel steuerbare Konfiguration?
+        </p>
+        <article class="card">
+          <h3>Quick-Check (3 Fragen)</h3>
+          <ol>
+            <li>Sind Kernprozesse und Datenmodell identisch?</li>
+            <li>Unterscheidet sich nur CI, Wording oder Rollenrechte?</li>
+            <li>Gibt es kundenspezifische Integrationen, die echten Code-Fork erzwingen?</li>
+          </ol>
+        </article>
+        <details>
+          <summary>Deep-Dive: Beispiele für "nicht duplizieren"</summary>
+          <ul>
+            <li><strong>Unterschiedliche CI:</strong> Farben, Logos, Typo je Tenant per Theme-Config.</li>
+            <li><strong>Abweichende Sprache:</strong> Texte via i18n-Keys statt separater Codebasis.</li>
+            <li><strong>Feature-Variante:</strong> Module per Feature-Flags aktivieren oder deaktivieren.</li>
+            <li><strong>Rechte:</strong> Rollen über Policy-Config statt Fork im Backend.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Deep-Dive: Wann Duplikation sinnvoll ist</summary>
+          <ul>
+            <li>Regulatorik erzwingt getrennte Infrastruktur und getrennten Release-Zyklus.</li>
+            <li>Fundamental anderes Domänenmodell oder eigene Integrationslandschaft.</li>
+            <li>Vertraglich geforderte Isolation, die über Tenant-Trennung hinausgeht.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
 
-                <div class="mt-6 rounded border border-neutral-800 bg-neutral-900/60 p-5">
-                    <h3 class="mb-3 font-semibold text-amber-300">Quick-Check (3 Fragen)</h3>
-                    <ol class="list-decimal space-y-2 pl-6 text-neutral-300">
-                        <li>Sind Kernprozesse und Datenmodell identisch?</li>
-                        <li>Unterscheidet sich nur CI, Wording oder Rollenrechte?</li>
-                        <li>Gibt es kundenspezifische Integrationen, die echten Code-Fork erzwingen?</li>
-                    </ol>
-                </div>
-
-                <details class="mt-6 rounded border border-neutral-800 bg-neutral-900/60 p-5">
-                    <summary class="cursor-pointer font-medium text-neutral-100">Deep-Dive: Beispiele fuer "nicht duplizieren"</summary>
-                    <ul class="mt-4 list-disc space-y-2 pl-6 text-neutral-300">
-                        <li><strong>Unterschiedliche CI:</strong> Farben, Logos, Typo je Tenant per Theme-Config.</li>
-                        <li><strong>Abweichende Sprache:</strong> Texte via i18n-Keys statt separater Codebasis.</li>
-                        <li><strong>Feature-Variante:</strong> Module per Feature-Flags aktivieren oder deaktivieren.</li>
-                        <li><strong>Rechte:</strong> Rollen ueber Policy-Config statt Fork im Backend.</li>
-                    </ul>
-                </details>
-
-                <details class="mt-4 rounded border border-neutral-800 bg-neutral-900/60 p-5">
-                    <summary class="cursor-pointer font-medium text-neutral-100">Deep-Dive: Wann Duplikation sinnvoll ist</summary>
-                    <ul class="mt-4 list-disc space-y-2 pl-6 text-neutral-300">
-                        <li>Regulatorik erzwingt getrennte Infrastruktur und getrennten Release-Zyklus.</li>
-                        <li>Fundamental anderes Domaenenmodell oder eigene Integrationslandschaft.</li>
-                        <li>Vertraglich geforderte Isolation, die ueber Tenant-Trennung hinausgeht.</li>
-                    </ul>
-                </details>
-            </div>
-        </section>
-
-        <section class="border-b border-neutral-800">
-            <div class="mx-auto max-w-6xl px-6 py-14">
-                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">03 - Umsetzung</p>
-                <h2 class="mb-5 text-3xl font-semibold md:text-4xl">Konkrete Einfuehrung in Projekten</h2>
-                <div class="grid gap-4 md:grid-cols-2">
-                    <div class="rounded border border-neutral-800 bg-neutral-900/60 p-5">
-                        <h3 class="mb-2 font-semibold">A. UTF-8-Guardrails</h3>
-                        <ul class="list-disc space-y-1 pl-6 text-sm text-neutral-300">
-                            <li>Encoding-Regel in <code>CLAUDE.md</code> verankern.</li>
-                            <li>Skill-Template um denselben Block erweitern.</li>
-                            <li>Review-Check mit deutschem Beispieltext inklusive Umlauten.</li>
-                        </ul>
-                    </div>
-                    <div class="rounded border border-neutral-800 bg-neutral-900/60 p-5">
-                        <h3 class="mb-2 font-semibold">B. Anti-Duplication-Review</h3>
-                        <ul class="list-disc space-y-1 pl-6 text-sm text-neutral-300">
-                            <li>Vor jedem Kundenableger den 3-Fragen-Check ausfuehren.</li>
-                            <li>Ergebnis als Architekturentscheidung dokumentieren.</li>
-                            <li>Bevorzugt Multi-Tenant plus Konfiguration statt Fork.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="mx-auto max-w-6xl px-6 py-14">
-                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">04 - Abschluss</p>
-                <h2 class="mb-3 text-3xl font-semibold md:text-4xl">Kurzfazit</h2>
-                <p class="max-w-4xl leading-relaxed text-neutral-300">
-                    Mit UTF-8-Guardrails und einem verpflichtenden Anti-Duplication-Check sinkt der Wartungsaufwand,
-                    waehrend Qualitaet und Wiederverwendbarkeit steigen.
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <footer class="border-t border-neutral-800">
-        <div class="mx-auto max-w-6xl px-6 py-6 text-xs tracking-wide text-neutral-500">
-            Hacks One-Pager · Struktur angelehnt an den Webseiten-Relaunch-Leitfaden
+    <section>
+      <div class="wrap">
+        <p class="sec-label">03 — Umsetzung</p>
+        <h2>Konkrete Einführung in Projekten.</h2>
+        <div class="steps">
+          <article class="step">
+            <h3>A. UTF-8-Guardrails</h3>
+            <ul>
+              <li>Encoding-Regel in <code>CLAUDE.md</code> verankern.</li>
+              <li>Skill-Template um denselben Block erweitern.</li>
+              <li>Review-Check mit deutschem Beispieltext inklusive Umlauten.</li>
+            </ul>
+          </article>
+          <article class="step">
+            <h3>B. Anti-Duplication-Review</h3>
+            <ul>
+              <li>Vor jedem Kundenableger den 3-Fragen-Check ausführen.</li>
+              <li>Ergebnis als Architekturentscheidung dokumentieren.</li>
+              <li>Bevorzugt Multi-Tenant plus Konfiguration statt Fork.</li>
+            </ul>
+          </article>
         </div>
-    </footer>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="sec-label">04 — Abschluss</p>
+        <h2>Kurzfazit.</h2>
+        <p class="lead">
+          Mit UTF-8-Guardrails und einem verpflichtenden Anti-Duplication-Check sinkt der Wartungsaufwand,
+          während Qualität und Wiederverwendbarkeit steigen.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Hacks One-Pager · Struktur angelehnt an den Webseiten-Relaunch-Leitfaden</div>
+  </footer>
 </body>
 </html>
