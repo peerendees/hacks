@@ -3,17 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BERENT | Neues Projekt</title>
+    <title>Hacks | Claude UTF-8 und Smart Duplication</title>
     <link href="output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-50">
-    <main class="max-w-4xl mx-auto px-4 py-16">
-        <h1 class="text-4xl font-bold text-berent-primary mb-4">
-            BERENT Website Template
-        </h1>
-        <p class="text-gray-600">
-            Starte hier – die Cursor Rules sind bereits eingebunden.
-        </p>
+<body class="bg-neutral-950 text-neutral-100">
+    <main>
+        <section class="border-b border-neutral-800">
+            <div class="mx-auto max-w-6xl px-6 py-20 lg:py-28">
+                <p class="mb-6 text-xs uppercase tracking-[0.25em] text-amber-500">Hack Guide</p>
+                <h1 class="max-w-4xl text-4xl font-semibold leading-tight md:text-6xl">
+                    Zwei praxisnahe Hacks fuer robuste
+                    <span class="text-amber-400">AI-Workflows</span>
+                </h1>
+                <p class="mt-6 max-w-3xl leading-relaxed text-neutral-300">
+                    Kompakt fuer erfahrene Nutzer, mit aufklappbaren Deep-Dives fuer die Umsetzung.
+                    Die Struktur lehnt sich an den Webseiten-Relaunch-Leitfaden an.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-3 text-xs">
+                    <span class="rounded border border-neutral-700 px-3 py-1.5 text-neutral-300">Claude Code</span>
+                    <span class="rounded border border-neutral-700 px-3 py-1.5 text-neutral-300">Skills</span>
+                    <span class="rounded border border-neutral-700 px-3 py-1.5 text-neutral-300">Produktstrategie</span>
+                    <span class="rounded border border-neutral-700 px-3 py-1.5 text-neutral-300">Multi-Tenant</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-b border-neutral-800">
+            <div class="mx-auto max-w-6xl px-6 py-14">
+                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">00 - Vorbereitung</p>
+                <h2 class="mb-5 text-3xl font-semibold md:text-4xl">Scope und Zielbild fixieren</h2>
+                <p class="max-w-4xl leading-relaxed text-neutral-300">
+                    Dieser One-Pager dokumentiert zwei Hacks: erstens robuste Zeichensatzvorgaben fuer deutschsprachige
+                    AI-Texte, zweitens eine Entscheidungslogik vor dem Duplizieren von Apps.
+                </p>
+                <details class="mt-6 rounded border border-neutral-800 bg-neutral-900/60 p-5">
+                    <summary class="cursor-pointer font-medium text-neutral-100">Details aufklappen</summary>
+                    <ul class="mt-4 list-disc space-y-2 pl-6 text-neutral-300">
+                        <li>Fokus: sofort anwendbare Patterns statt langer Theorie.</li>
+                        <li>Nutzung: Team-Referenz fuer neue Projekte und Kundenableger.</li>
+                        <li>Format: kurze Kernbotschaften plus vertiefende Umsetzungsschritte.</li>
+                    </ul>
+                </details>
+            </div>
+        </section>
+
+        <section class="border-b border-neutral-800">
+            <div class="mx-auto max-w-6xl px-6 py-14">
+                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">01 - Hack A</p>
+                <h2 class="mb-5 text-3xl font-semibold md:text-4xl">UTF-8 fuer Claude und Skills erzwingen</h2>
+                <p class="max-w-4xl leading-relaxed text-neutral-300">
+                    Wenn deutsche Inhalte generiert werden, muss die Prompt- und Skill-Basis explizit UTF-8 mit Umlauten
+                    vorgeben. So vermeidest Du fehlerhafte Darstellungen wie "ae/oe/ue" oder kaputte Sonderzeichen.
+                </p>
+
+                <div class="mt-6 grid gap-4 md:grid-cols-2">
+                    <div class="rounded border border-neutral-800 bg-neutral-900/60 p-5">
+                        <h3 class="mb-2 font-semibold text-amber-300">Kernregel</h3>
+                        <p class="text-sm text-neutral-300">
+                            In jeder <code>CLAUDE.md</code> und in jedem textgenerierenden Skill eine feste Sprach- und
+                            Encoding-Regel hinterlegen: "Deutsch, UTF-8, Umlaute und Eszett unveraendert ausgeben."
+                        </p>
+                    </div>
+                    <div class="rounded border border-neutral-800 bg-neutral-900/60 p-5">
+                        <h3 class="mb-2 font-semibold text-amber-300">Nutzen</h3>
+                        <p class="text-sm text-neutral-300">
+                            Konsistente Ausgaben in Mails, Webcopy, Doku und UI-Texten ohne manuelle Nachkorrektur.
+                        </p>
+                    </div>
+                </div>
+
+                <details class="mt-6 rounded border border-neutral-800 bg-neutral-900/60 p-5">
+                    <summary class="cursor-pointer font-medium text-neutral-100">Deep-Dive: konkrete Vorlage</summary>
+                    <div class="mt-4 space-y-4 text-neutral-300">
+                        <p class="text-sm">Empfohlener Baustein fuer <code>CLAUDE.md</code> und textnahe Skills:</p>
+                        <pre class="overflow-x-auto rounded bg-neutral-950 p-4 text-xs text-neutral-200"><code>Sprache und Encoding:
+- Antworte auf Deutsch (Du-Form), sofern nicht anders angefordert.
+- Nutze UTF-8 als Zeichensatz.
+- Umlaute und "ß" korrekt ausgeben.
+- Keine ASCII-Umschreibungen fuer deutsche Sonderzeichen verwenden.</code></pre>
+                        <p class="text-sm">Ergaenze diesen Block als festen Bestandteil jedes neuen Skills mit Textausgabe.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="border-b border-neutral-800">
+            <div class="mx-auto max-w-6xl px-6 py-14">
+                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">02 - Hack B</p>
+                <h2 class="mb-5 text-3xl font-semibold md:text-4xl">Vor Duplikation: Produkt oder nur Konfiguration?</h2>
+                <p class="max-w-4xl leading-relaxed text-neutral-300">
+                    Bevor Du eine App fuer einen weiteren Kunden duplizierst, pruefe systematisch:
+                    Ist die Funktionalitaet wirklich anders, oder reicht eine variabel steuerbare Konfiguration?
+                </p>
+
+                <div class="mt-6 rounded border border-neutral-800 bg-neutral-900/60 p-5">
+                    <h3 class="mb-3 font-semibold text-amber-300">Quick-Check (3 Fragen)</h3>
+                    <ol class="list-decimal space-y-2 pl-6 text-neutral-300">
+                        <li>Sind Kernprozesse und Datenmodell identisch?</li>
+                        <li>Unterscheidet sich nur CI, Wording oder Rollenrechte?</li>
+                        <li>Gibt es kundenspezifische Integrationen, die echten Code-Fork erzwingen?</li>
+                    </ol>
+                </div>
+
+                <details class="mt-6 rounded border border-neutral-800 bg-neutral-900/60 p-5">
+                    <summary class="cursor-pointer font-medium text-neutral-100">Deep-Dive: Beispiele fuer "nicht duplizieren"</summary>
+                    <ul class="mt-4 list-disc space-y-2 pl-6 text-neutral-300">
+                        <li><strong>Unterschiedliche CI:</strong> Farben, Logos, Typo je Tenant per Theme-Config.</li>
+                        <li><strong>Abweichende Sprache:</strong> Texte via i18n-Keys statt separater Codebasis.</li>
+                        <li><strong>Feature-Variante:</strong> Module per Feature-Flags aktivieren oder deaktivieren.</li>
+                        <li><strong>Rechte:</strong> Rollen ueber Policy-Config statt Fork im Backend.</li>
+                    </ul>
+                </details>
+
+                <details class="mt-4 rounded border border-neutral-800 bg-neutral-900/60 p-5">
+                    <summary class="cursor-pointer font-medium text-neutral-100">Deep-Dive: Wann Duplikation sinnvoll ist</summary>
+                    <ul class="mt-4 list-disc space-y-2 pl-6 text-neutral-300">
+                        <li>Regulatorik erzwingt getrennte Infrastruktur und getrennten Release-Zyklus.</li>
+                        <li>Fundamental anderes Domaenenmodell oder eigene Integrationslandschaft.</li>
+                        <li>Vertraglich geforderte Isolation, die ueber Tenant-Trennung hinausgeht.</li>
+                    </ul>
+                </details>
+            </div>
+        </section>
+
+        <section class="border-b border-neutral-800">
+            <div class="mx-auto max-w-6xl px-6 py-14">
+                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">03 - Umsetzung</p>
+                <h2 class="mb-5 text-3xl font-semibold md:text-4xl">Konkrete Einfuehrung in Projekten</h2>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <div class="rounded border border-neutral-800 bg-neutral-900/60 p-5">
+                        <h3 class="mb-2 font-semibold">A. UTF-8-Guardrails</h3>
+                        <ul class="list-disc space-y-1 pl-6 text-sm text-neutral-300">
+                            <li>Encoding-Regel in <code>CLAUDE.md</code> verankern.</li>
+                            <li>Skill-Template um denselben Block erweitern.</li>
+                            <li>Review-Check mit deutschem Beispieltext inklusive Umlauten.</li>
+                        </ul>
+                    </div>
+                    <div class="rounded border border-neutral-800 bg-neutral-900/60 p-5">
+                        <h3 class="mb-2 font-semibold">B. Anti-Duplication-Review</h3>
+                        <ul class="list-disc space-y-1 pl-6 text-sm text-neutral-300">
+                            <li>Vor jedem Kundenableger den 3-Fragen-Check ausfuehren.</li>
+                            <li>Ergebnis als Architekturentscheidung dokumentieren.</li>
+                            <li>Bevorzugt Multi-Tenant plus Konfiguration statt Fork.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="mx-auto max-w-6xl px-6 py-14">
+                <p class="mb-4 text-xs uppercase tracking-[0.2em] text-amber-500">04 - Abschluss</p>
+                <h2 class="mb-3 text-3xl font-semibold md:text-4xl">Kurzfazit</h2>
+                <p class="max-w-4xl leading-relaxed text-neutral-300">
+                    Mit UTF-8-Guardrails und einem verpflichtenden Anti-Duplication-Check sinkt der Wartungsaufwand,
+                    waehrend Qualitaet und Wiederverwendbarkeit steigen.
+                </p>
+            </div>
+        </section>
     </main>
+
+    <footer class="border-t border-neutral-800">
+        <div class="mx-auto max-w-6xl px-6 py-6 text-xs tracking-wide text-neutral-500">
+            Hacks One-Pager · Struktur angelehnt an den Webseiten-Relaunch-Leitfaden
+        </div>
+    </footer>
 </body>
 </html>
