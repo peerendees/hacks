@@ -219,6 +219,19 @@
     }
     .step ul { padding-left: 1.1rem; }
 
+    .header-back {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--copper);
+      text-decoration: none;
+      padding: .75rem 2rem;
+      transition: color .2s;
+    }
+    .header-back:hover { color: var(--gold); }
+
     footer {
       padding: 2rem 0;
       font-family: "JetBrains Mono", monospace;
@@ -238,6 +251,7 @@
   </style>
 </head>
 <body>
+  <a href="https://berent.ai/guides" class="header-back" onclick="event.preventDefault(); if(window.opener) { window.close(); } else if(document.referrer.includes('berent.ai')) { history.back(); } else { window.location.href='https://berent.ai/guides'; }">&#8592; berent.ai</a>
   <main>
     <header class="hero">
       <div class="wrap">
